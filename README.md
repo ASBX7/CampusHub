@@ -12,8 +12,7 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 - 📚 **Course Reviews**  
 - 📝 **Course Notes**  
 - 📰 **Campus News**  
-- 🎭 **Club Activities**  
-- 💰 **Student Marketplace**  
+- 🎭 **Club Activities**    
 
 ---
 
@@ -22,10 +21,10 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 | **Name**                  | **Student ID**  | **GitHub Username** |
 |---------------------------|---------------|---------------------|
 | AHMED SALAH MAHMOOD       | 202010770     | [ASBX7](https://github.com/ASBX7) |
-| REDA FOUAD ALSHBIB        | 202010856     | *TBD*              |
-| ALI NASER MOHAMED         | 202009697     | *TBD*              |
-| MOHAMMAD HAMZAH MURAD     | 202101456     | *TBD*              |
-| AHMED MOHAMED ALSHAIKH    | 202105159     | *TBD*              |
-| HASHEM AHMED ALSAIE       | 202204853     | *TBD*              |
+| REDA FOUAD ALSHBIB        | 202010856     | [ShabeebReda](https://github.com/ShabeebReda) |
+| ALI NASER MOHAMED         | 202009697     | [alinasser-02](https://github.com/alinasser-02) |
+| MOHAMMAD HAMZAH MURAD     | 202101456     | [mohamadmurad5](https://github.com/mohamadmurad5) |
+| AHMED MOHAMED ALSHAIKH    | 202105159     | [A7med-p](https://github.com/A7med-p) |
+| HASHEM AHMED ALSAIE       | 202204853     | [hadrawer](https://github.com/Hadrawer) |
 
 ---
