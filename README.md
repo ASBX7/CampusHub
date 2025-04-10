@@ -13,7 +13,7 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 - 📝 **Course Notes**  : **REDA FOUAD S AL SHBIB**
 - 📰 **Campus News**  : ****
 - 🎭 **Club Activities**   : **** 
-- @   **Student Marketplace** : **AHMED MOHAMED KHALIL EBRAHIM ALSHAIKH**
+- 🛒   **Student Marketplace** : **AHMED MOHAMED KHALIL EBRAHIM ALSHAIKH**
 
 ---
 
