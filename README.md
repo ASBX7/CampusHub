@@ -7,12 +7,13 @@
 Campus Hub provides a centralized space for students to connect, share knowledge, and stay updated on campus activities. Each team member is responsible for a specific module, ensuring a **consistent design, structured development, and responsive user experience**.  
 
 ### 🛠️ Modules We Are Building:  
-- 📅 **Events Calendar**  
-- 🎓 **Study Group Finder**  
-- 📚 **Course Reviews**  
-- 📝 **Course Notes**  
-- 📰 **Campus News**  
-- 🎭 **Club Activities**    
+- 📅 **Events Calendar** : **AHMED SALAH ABBAS MAHMOOD**  
+- 🎓 **Study Group Finder**  : **ALI NASER AHMED MOHAMED**
+- 📚 **Course Reviews**  : **HASHEM AHMED OBAID ALSAIE**
+- 📝 **Course Notes**  : **REDA FOUAD S AL SHBIB**
+- 📰 **Campus News**  : ****
+- 🎭 **Club Activities**   : **** 
+- @   **Student Marketplace** : **AHMED MOHAMED KHALIL EBRAHIM ALSHAIKH**
 
 ---
 
