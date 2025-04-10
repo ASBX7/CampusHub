@@ -11,8 +11,7 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 - 🎓 **Study Group Finder**  : **ALI NASER AHMED MOHAMED**
 - 📚 **Course Reviews**  : **HASHEM AHMED OBAID ALSAIE**
 - 📝 **Course Notes**  : **REDA FOUAD S AL SHBIB**
-- 📰 **Campus News**  : ****
-- 🎭 **Club Activities**   : **** 
+- 📰 **Campus News**  : **MOHAMMAD HAMZAH ABDULMALEK MURAD**
 - 🛒   **Student Marketplace** : **AHMED MOHAMED KHALIL EBRAHIM ALSHAIKH**
 
 ---
