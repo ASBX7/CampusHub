@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Study Group Finder </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<div class="container">
+
+<header>
+<h1>Study Group Finder</h1>
+<nav>
+<ul>
+<li><a href="#">HOME</a></li>
+<li><a href="CreateItem.html">ADD NEW GROUP</a></li>
+</ul>
+</nav>
+</header>
+
+
+<main>
+<div class ="search">
+<section class="search_bar"> <input type="search" placeholder="Search Study Groups..."></section>
+  
+<div class="sortby">
+<label for="menu">Sort by:</label>
+<select id="menu" name="menu">
+<option class="option1">Date</option>
+<option class="option2">Popularity</option>
+</select>
+</div>
+</div>
+<div class="items">
+    
+<div class="item">
+<a href="ItemDetails.html">
+<h3>ITCS101</h3>
+</a>
+<p>Location: s40-059</p>
+<p>Date: 01-06-2025</p>
+
+</div>
+
+<div class="item">
+<a href="ItemDetails.html">
+<h3>ITCC240</h3>
+</a>
+<p>Location: s40-2053</p>
+<p>Date: 03-06-2025</p>
+
+</div>
+
+<div class="item">
+<a href="ItemDetails.html">
+<h3>MATHS102</h3>
+</a>
+<p>Location:s41-1048</p>
+<p>Date: 29-5-2025</p>
+
+</div>
+
+</div>
+
+<div class="back-next">
+    <button class="back">Previous</button>
+    <button class="next">Next</button>
+</div>
+
+</main>
+
+
+
+
+
+
+    </div>
+</body>
+</html>
