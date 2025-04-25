@@ -22,6 +22,7 @@
     font-size: 2rem;
     margin: 0;
     text-align: center;
+    color: black;
   }
   
   .header-content a:last-child {
@@ -40,6 +41,14 @@
   
   /* Detail Buttons */
   .detail-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  /* Form Buttons */
+  .form-buttons {
     display: flex;
     justify-content: center;
     gap: 1rem;

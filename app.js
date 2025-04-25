@@ -1,6 +1,7 @@
 let eventsData = [];
 let currentPage = 1;
 const eventsPerPage = 6;
+let currentView = "calendar"; // default view
 
 function showSuccessMessage(message) {
   const box = document.getElementById("successMessage");
@@ -32,6 +33,7 @@ function loadEvents() {
   const search = document.getElementById('searchInput').value.toLowerCase();
   const category = document.getElementById('filterCategory').value;
   const sort = document.getElementById('sortSelect').value;
+  currentView = document.getElementById('viewSelect').value;
 
   let filtered = [...eventsData];
   if (search) filtered = filtered.filter(e => e.title.toLowerCase().includes(search));
@@ -39,8 +41,19 @@ function loadEvents() {
   if (sort === 'name') filtered.sort((a, b) => a.title.localeCompare(b.title));
   else filtered.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
 
-  renderCalendar(filtered);
-  renderPagination(filtered);
+  if (currentView === "calendar") {
+    document.getElementById('calendarContainer').style.display = "grid";
+    document.getElementById('calendarHeader').style.display = "grid";
+    document.getElementById('listContainer').style.display = "none";
+    renderCalendar(filtered);
+    renderPagination(filtered);
+  } else {
+    document.getElementById('calendarContainer').style.display = "none";
+    document.getElementById('calendarHeader').style.display = "none";
+    document.getElementById('listContainer').style.display = "block";
+    renderList(filtered);
+    document.getElementById('pagination').innerHTML = "";
+  }
 }
 
 function renderCalendar(events) {
@@ -49,7 +62,6 @@ function renderCalendar(events) {
   container.innerHTML = '';
   header.innerHTML = '';
 
-  // Create calendar headers
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   days.forEach(day => {
     const div = document.createElement('div');
@@ -58,7 +70,6 @@ function renderCalendar(events) {
     header.appendChild(div);
   });
 
-  // Calendar dynamic logic
   const today = new Date();
   const year = today.getFullYear();
   const month = today.getMonth();
@@ -68,14 +79,12 @@ function renderCalendar(events) {
   const start = (currentPage - 1) * eventsPerPage;
   const pageEvents = events.slice(start, start + eventsPerPage);
 
-  // Empty cells before first day
   for (let i = 0; i < startDay; i++) {
     const empty = document.createElement('div');
     empty.className = 'calendar-day empty-day';
     container.appendChild(empty);
   }
 
-  // Fill days
   for (let day = 1; day <= daysInMonth; day++) {
     const dayCell = document.createElement('div');
     dayCell.className = 'calendar-day';
@@ -96,6 +105,22 @@ function renderCalendar(events) {
 
     container.appendChild(dayCell);
   }
+}
+
+function renderList(events) {
+  const tbody = document.getElementById('listTableBody');
+  tbody.innerHTML = '';
+
+  events.forEach(e => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td><a href="#event-detail" onclick="showEventDetail(${e.id})">${e.title}</a></td>
+      <td>${new Date(e.datetime).toLocaleString()}</td>
+      <td>${e.location || '-'}</td>
+      <td>${e.category}</td>
+    `;
+    tbody.appendChild(row);
+  });
 }
 
 function renderPagination(events) {
@@ -187,5 +212,16 @@ document.getElementById('eventForm').addEventListener('submit', e => {
 document.getElementById('searchInput').addEventListener('input', loadEvents);
 document.getElementById('filterCategory').addEventListener('change', loadEvents);
 document.getElementById('sortSelect').addEventListener('change', loadEvents);
+document.getElementById('viewSelect').addEventListener('change', loadEvents);
 
 window.addEventListener('load', fetchEvents);
+
+function deleteEvent() {
+  const id = document.getElementById('editEventId').value;
+  if (confirm('Are you sure you want to delete this event?')) {
+    eventsData = eventsData.filter(ev => ev.id != id);
+    showSuccessMessage('Event deleted successfully!');
+    location.hash = 'listing';
+    loadEvents();
+  }
+}
