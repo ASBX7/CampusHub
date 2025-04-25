@@ -1,232 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Hub - Events Calendar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <style>
-        /* Calendar Grid */
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 0.25rem;
-            margin: 1rem 0;
-        }
-        
-        .calendar-header {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        .calendar-day {
-            border: 1px solid var(--muted-border-color);
-            min-height: 120px;
-            padding: 0.5rem;
-            background: white;
-        }
-        
-        .day-number {
-            font-weight: bold;
-            margin-bottom: 0.25rem;
-        }
-        
-        .empty-day {
-            background: var(--muted-border-color);
-            opacity: 0.5;
-        }
-        
-        /* Event Items */
-        .event-tag {
-            color: white;
-            border-radius: 4px;
-            padding: 0.25rem 0.5rem;
-            margin-bottom: 0.25rem;
-            font-size: 0.8rem;
-            display: block;
-        }
-        
-        .academic { background: #4e79a7; }
-        .social { background: #e15759; }
-        .sports { background: #76b7b2; }
-        
-        /* View Management */
-        .view { display: none; }
-        .view:target { display: block; }
-        .view:target ~ .view { display: none; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .calendar {
-                grid-template-columns: 1fr;
-            }
-            
-            .calendar-day {
-                min-height: auto;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Hub - Events Calendar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <style>
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.25rem;
+      margin: 1rem 0;
+    }
+    .calendar-header {
+      background: var(--primary);
+      color: white;
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: bold;
+    }
+    .calendar-day {
+      border: 1px solid var(--muted-border-color);
+      min-height: 120px;
+      padding: 0.5rem;
+      background: white;
+    }
+    .day-number {
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+    }
+    .empty-day {
+      background: var(--muted-border-color);
+      opacity: 0.5;
+    }
+    .event-tag {
+      color: white;
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+      display: block;
+      cursor: pointer;
+    }
+    .academic { background: #4e79a7; }
+    .social { background: #e15759; }
+    .sports { background: #76b7b2; }
+    .view { display: none; }
+    .view:target { display: block; }
+    @media (max-width: 768px) {
+      .calendar { grid-template-columns: 1fr; }
+      .calendar-day { min-height: auto; }
+    }
+    .loading, .error {
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0;
+      gap: 0.5rem;
+    }
+    .success-message {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 0.75rem;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+      text-align: center;
+      margin: 1rem 0;
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header class="container">
-        <h1>Events Calendar</h1>
-        <nav>
-            <a href="#listing">Calendar View</a>
-            <a href="#add-form" role="button">+ Add Event</a>
-        </nav>
-    </header>
+  <header class="container">
+    <h1>Events Calendar</h1>
+    <nav>
+      <a href="#listing">Calendar View</a>
+      <a href="#add-form" role="button">+ Add Event</a>
+    </nav>
+  </header>
 
-    <main class="container">
-        <!-- Main Listing View -->
-        <section id="listing" class="view">
-            <div class="grid">
-                <input type="search" placeholder="Search events..." style="flex-grow: 1;">
-                <select>
-                    <option>All Categories</option>
-                    <option>Academic</option>
-                    <option>Social</option>
-                    <option>Sports</option>
-                </select>
-                <select>
-                    <option>Sort by Date</option>
-                    <option>Sort by Name</option>
-                </select>
-                <button>Today</button>
-            </div>
-            
-            <!-- Full Month Calendar -->
-            <div class="calendar">
-                <!-- Day Headers -->
-                <div class="calendar-header">Sun</div>
-                <div class="calendar-header">Mon</div>
-                <div class="calendar-header">Tue</div>
-                <div class="calendar-header">Wed</div>
-                <div class="calendar-header">Thu</div>
-                <div class="calendar-header">Fri</div>
-                <div class="calendar-header">Sat</div>
-                
-                <!-- April 2025 (30 days) starting on Tuesday -->
-                <!-- Week 1 -->
-                <div class="calendar-day empty-day"><div class="day-number">30</div></div>
-                <div class="calendar-day empty-day"><div class="day-number">31</div></div>
-                <div class="calendar-day"><div class="day-number">1</div><a href="#cs101" class="event-tag academic">CS101 Lecture</a></div>
-                <div class="calendar-day"><div class="day-number">2</div><a href="#basketball" class="event-tag sports">Basketball</a></div>
-                <div class="calendar-day"><div class="day-number">3</div></div>
-                <div class="calendar-day"><div class="day-number">4</div><a href="#mathquiz" class="event-tag academic">Math Quiz</a></div>
-                <div class="calendar-day"><div class="day-number">5</div></div>
-                
-                <!-- Week 2 -->
-                <div class="calendar-day"><div class="day-number">6</div></div>
-                <div class="calendar-day"><div class="day-number">7</div><a href="#movie" class="event-tag social">Movie Night</a></div>
-                <div class="calendar-day"><div class="day-number">8</div></div>
-                <div class="calendar-day"><div class="day-number">9</div><a href="#physics" class="event-tag academic">Physics Lab</a></div>
-                <div class="calendar-day"><div class="day-number">10</div></div>
-                <div class="calendar-day"><div class="day-number">11</div><a href="#soccer" class="event-tag sports">Soccer</a></div>
-                <div class="calendar-day"><div class="day-number">12</div></div>
-            </div>
-            
-            <!-- Pagination -->
-            <nav>
-                <ul style="display: flex; justify-content: center; gap: 1rem;">
-                    <li><a href="#!">Previous</a></li>
-                    <li><a href="#!">1</a></li>
-                    <li><a href="#!" aria-current="page">2</a></li>
-                    <li><a href="#!">Next</a></li>
-                </ul>
-            </nav>
-        </section>
-        
-        <!-- Add Event Form -->
-        <section id="add-form" class="view">
-            <h2>Add New Event</h2>
-            <form>
-                <label>
-                    Event Title*
-                    <input type="text" required placeholder="e.g., CS101 Midterm Review">
-                </label>
-                <label>
-                    Date & Time*
-                    <input type="datetime-local" required>
-                </label>
-                <label>
-                    Location
-                    <input type="text" placeholder="Building/Room">
-                </label>
-                <label>
-                    Category*
-                    <select required>
-                        <option value="">Select category</option>
-                        <option>Academic</option>
-                        <option>Social</option>
-                        <option>Sports</option>
-                    </select>
-                </label>
-                <label>
-                    Description
-                    <textarea placeholder="Event details..."></textarea>
-                </label>
-                <div style="display: flex; gap: 0.5rem;">
-                    <button type="submit">Submit</button>
-                    <a href="#listing" role="button" class="secondary">Cancel</a>
-                </div>
-            </form>
-        </section>
-        
-        <!-- Event Detail Views -->
-        <article id="cs101" class="view" style="margin-top: 2rem;">
-            <h2>CS101 Lecture</h2>
-            <p><strong>Date:</strong> April 1, 2025 at 10:00 AM</p>
-            <p><strong>Location:</strong> Science Building 203</p>
-            <p><strong>Category:</strong> Academic</p>
-            <p>Introduction to algorithms and data structures. Bring your laptops.</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <button>Edit</button>
-                <button class="secondary">Delete</button>
-                <a href="#listing" role="button">Back to Calendar</a>
-            </div>
-        </article>
+  <main class="container">
+    <div id="successMessage" class="success-message"></div>
 
-        <article id="basketball" class="view" style="margin-top: 2rem;">
-            <h2>Basketball Practice</h2>
-            <p><strong>Date:</strong> April 2, 2025 at 4:00 PM</p>
-            <p><strong>Location:</strong> Sports Complex Court 1</p>
-            <p><strong>Category:</strong> Sports</p>
-            <p>Team practice session. All players must attend.</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <button>Edit</button>
-                <button class="secondary">Delete</button>
-                <a href="#listing" role="button">Back to Calendar</a>
-            </div>
-        </article>
+    <!-- Search, Filter, Sort -->
+    <section id="listing" class="view">
+      <div class="grid">
+        <input id="searchInput" type="search" placeholder="Search events...">
+        <select id="filterCategory">
+          <option value="">All Categories</option>
+          <option value="academic">Academic</option>
+          <option value="social">Social</option>
+          <option value="sports">Sports</option>
+        </select>
+        <select id="sortSelect">
+          <option value="date">Sort by Date</option>
+          <option value="name">Sort by Name</option>
+        </select>
+        <button onclick="goToToday()">Today</button>
+      </div>
+      <div id="loading" class="loading">Loading events...</div>
+      <div id="error" class="error" style="display: none;">Failed to load events. Please try again later.</div>
+      <div class="calendar">
+        <div class="calendar-header">Sun</div>
+        <div class="calendar-header">Mon</div>
+        <div class="calendar-header">Tue</div>
+        <div class="calendar-header">Wed</div>
+        <div class="calendar-header">Thu</div>
+        <div class="calendar-header">Fri</div>
+        <div class="calendar-header">Sat</div>
+      </div>
+      <div id="calendarContainer" class="calendar"></div>
+      <div id="pagination" class="pagination"></div>
+    </section>
 
-        <article id="mathquiz" class="view" style="margin-top: 2rem;">
-            <h2>Math Quiz</h2>
-            <p><strong>Date:</strong> April 4, 2025 at 1:00 PM</p>
-            <p><strong>Location:</strong> Math Building 101</p>
-            <p><strong>Category:</strong> Academic</p>
-            <p>Chapter 3-4 quiz. Bring calculator and pencils.</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <button>Edit</button>
-                <button class="secondary">Delete</button>
-                <a href="#listing" role="button">Back to Calendar</a>
-            </div>
-        </article>
+    <!-- Event Details View -->
+    <section id="event-detail" class="view">
+      <h2 id="detailTitle">Event Title</h2>
+      <p><strong>Date:</strong> <span id="detailDate"></span></p>
+      <p><strong>Location:</strong> <span id="detailLocation"></span></p>
+      <p><strong>Category:</strong> <span id="detailCategory"></span></p>
+      <p><strong>Description:</strong></p>
+      <p id="detailDescription"></p>
+      <div style="display: flex; gap: 0.5rem;">
+        <button onclick="editEventDetail()">Edit</button>
+        <a href="#listing" role="button">Back to Calendar</a>
+      </div>
+    </section>
 
-        <article id="movie" class="view" style="margin-top: 2rem;">
-            <h2>Movie Night</h2>
-            <p><strong>Date:</strong> April 7, 2025 at 7:00 PM</p>
-            <p><strong>Location:</strong> Student Center Lounge</p>
-            <p><strong>Category:</strong> Social</p>
-            <p>Weekly movie night. This week: The Social Network.</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <button>Edit</button>
-                <button class="secondary">Delete</button>
-                <a href="#listing" role="button">Back to Calendar</a>
-            </div>
-        </article>
-    </main>
+    <!-- Add/Edit Event Form -->
+    <section id="add-form" class="view">
+      <h2 id="formTitle">Add New Event</h2>
+      <form id="eventForm">
+        <input type="hidden" id="editEventId">
+        <label>Event Title*<input id="eventTitle" type="text" required></label>
+        <label>Date & Time*<input id="eventDateTime" type="datetime-local" required></label>
+        <label>Location<input id="eventLocation" type="text"></label>
+        <label>Category*
+          <select id="eventCategory" required>
+            <option value="">Select category</option>
+            <option value="academic">Academic</option>
+            <option value="social">Social</option>
+            <option value="sports">Sports</option>
+          </select>
+        </label>
+        <label>Description<textarea id="eventDescription"></textarea></label>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="submit">Submit</button>
+          <a href="#listing" role="button" class="secondary">Cancel</a>
+        </div>
+        <p id="formError" style="color: red; display: none;">Please fill in all required fields.</p>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    let eventsData = [];
+    let currentPage = 1;
+    const eventsPerPage = 6;
+
+    function showSuccessMessage(message) {
+      const box = document.getElementById("successMessage");
+      box.textContent = message;
+      box.style.display = "block";
+      setTimeout(() => {
+        box.style.display = "none";
+      }, 3000);
+    }
+
+    async function fetchEvents() {
+      try {
+        const response = await fetch('https://mocki.io/v1/23c6db79-ea57-4f24-b154-7bbaabb0336f');
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        eventsData = data;
+      } catch {
+        eventsData = [
+          { id: 1, title: 'Math Class', datetime: '2025-04-01T10:00', category: 'academic', location: 'Room 101', description: 'Algebra intro' },
+          { id: 2, title: 'Football', datetime: '2025-04-02T16:00', category: 'sports', location: 'Field 1', description: 'Friendly match' },
+          { id: 3, title: 'Movie Night', datetime: '2025-04-03T19:00', category: 'social', location: 'Main Hall', description: 'Comedy movie' },
+        ];
+      }
+      loadEvents();
+      document.getElementById('loading').style.display = 'none';
+    }
+
+    function loadEvents() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const category = document.getElementById('filterCategory').value;
+      const sort = document.getElementById('sortSelect').value;
+
+      let filtered = [...eventsData];
+      if (search) filtered = filtered.filter(e => e.title.toLowerCase().includes(search));
+      if (category) filtered = filtered.filter(e => e.category === category);
+      if (sort === 'name') filtered.sort((a, b) => a.title.localeCompare(b.title));
+      else filtered.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+
+      renderCalendar(filtered);
+      renderPagination(filtered);
+    }
+
+    function renderCalendar(events) {
+      const container = document.getElementById('calendarContainer');
+      container.innerHTML = '';
+      const start = (currentPage - 1) * eventsPerPage;
+      const pageEvents = events.slice(start, start + eventsPerPage);
+      const daysInMonth = 30;
+      const startDay = 2;
+      for (let i = 0; i < startDay; i++) container.innerHTML += '<div class="calendar-day empty-day"></div>';
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayEvents = pageEvents.filter(e => new Date(e.datetime).getDate() === day);
+        const content = dayEvents.map(e => `<span class="event-tag ${e.category}" onclick="showEventDetail(${e.id})">${e.title}</span>`).join('');
+        container.innerHTML += `<div class="calendar-day"><div class="day-number">${day}</div>${content}</div>`;
+      }
+    }
+
+    function renderPagination(events) {
+      const pageCount = Math.ceil(events.length / eventsPerPage);
+      const pagination = document.getElementById('pagination');
+      pagination.innerHTML = '';
+      if (pageCount > 1) {
+        if (currentPage > 1) pagination.innerHTML += `<button onclick="changePage(${currentPage - 1})">Previous</button>`;
+        for (let i = 1; i <= pageCount; i++) pagination.innerHTML += `<button onclick="changePage(${i})">${i}</button>`;
+        if (currentPage < pageCount) pagination.innerHTML += `<button onclick="changePage(${currentPage + 1})">Next</button>`;
+      }
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      loadEvents();
+    }
+
+    function showEventDetail(id) {
+      const e = eventsData.find(ev => ev.id === id);
+      document.getElementById('detailTitle').textContent = e.title;
+      document.getElementById('detailDate').textContent = new Date(e.datetime).toLocaleString();
+      document.getElementById('detailLocation').textContent = e.location;
+      document.getElementById('detailCategory').textContent = e.category;
+      document.getElementById('detailDescription').textContent = e.description;
+      document.getElementById('editEventId').value = e.id;
+      location.hash = 'event-detail';
+    }
+
+    function editEventDetail() {
+      const id = document.getElementById('editEventId').value;
+      const e = eventsData.find(ev => ev.id == id);
+      document.getElementById('formTitle').textContent = 'Edit Event';
+      document.getElementById('eventTitle').value = e.title;
+      document.getElementById('eventDateTime').value = e.datetime;
+      document.getElementById('eventLocation').value = e.location;
+      document.getElementById('eventCategory').value = e.category;
+      document.getElementById('eventDescription').value = e.description;
+      location.hash = 'add-form';
+    }
+
+    function goToToday() {
+      const today = new Date().getDate();
+      const days = document.querySelectorAll('.calendar-day');
+      days.forEach(d => {
+        if (d.querySelector('.day-number')?.textContent == today.toString()) {
+          d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+
+    document.getElementById('eventForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const id = document.getElementById('editEventId').value;
+      const title = document.getElementById('eventTitle').value;
+      const datetime = document.getElementById('eventDateTime').value;
+      const location = document.getElementById('eventLocation').value;
+      const category = document.getElementById('eventCategory').value;
+      const description = document.getElementById('eventDescription').value;
+      if (!title || !datetime || !category) {
+        document.getElementById('formError').style.display = 'block';
+        return;
+      }
+      document.getElementById('formError').style.display = 'none';
+      if (id) {
+        const index = eventsData.findIndex(ev => ev.id == id);
+        eventsData[index] = { id: parseInt(id), title, datetime, location, category, description };
+        showSuccessMessage("Event updated successfully!");
+      } else {
+        eventsData.push({
+          id: eventsData.length ? eventsData[eventsData.length - 1].id + 1 : 1,
+          title, datetime, location, category, description
+        });
+        showSuccessMessage("New event added successfully!");
+      }
+      e.target.reset();
+      document.getElementById('formTitle').textContent = 'Add New Event';
+      document.getElementById('editEventId').value = '';
+      location.hash = 'listing';
+      loadEvents();
+    });
+
+    document.getElementById('searchInput').addEventListener('input', loadEvents);
+    document.getElementById('filterCategory').addEventListener('change', loadEvents);
+    document.getElementById('sortSelect').addEventListener('change', loadEvents);
+
+    window.addEventListener('load', fetchEvents);
+  </script>
 </body>
 </html>
