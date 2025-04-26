@@ -1,34 +1,30 @@
-# 📅 Campus Hub - Events Calendar Module
+# 🌍 Campus Hub - University Collaboration Platform 🎓  
 
 ---
 
-## 📖 Overview
+## 📖 Overview  
 
-This module is part of the **Campus Hub** platform, designed to allow students to **view**, **add**, **edit**, **delete**, and **manage events** happening on campus.  
-It provides two main views — a **Calendar View** and a **List View** — for a flexible and easy-to-use experience.
+Campus Hub provides a centralized space for students to connect, share knowledge, and stay updated on campus activities. Each team member is responsible for a specific module, ensuring a **consistent design, structured development, and responsive user experience**.  
 
-This part is developed by **Ahmed Salah Abbas Mahmood (202010770)**.
-
----
-
-## ✨ Features of Events Calendar
-
-- 📅 **Calendar View**: Visual calendar showing daily events.
-- 📋 **List View**: Sortable and searchable list of all events.
-- 🔍 **Search Functionality**: Quickly find events by title.
-- 🏷️ **Category Filtering**: Filter events (Academic, Social, Sports).
-- 📊 **Sorting**: Sort events by Date or Name.
-- ➕ **Add Event**: Add new events with title, time, location, and category.
-- ✏️ **Edit Event**: Update event details.
-- 🗑️ **Delete Event**: Safely remove events with confirmation.
-- 📱 **Responsive Design**: Works on both desktop and mobile devices.
+### 🛠️ Modules We Are Building:  
+- 📅 **Events Calendar** : **AHMED SALAH ABBAS MAHMOOD**  
+- 🎓 **Study Group Finder**  : **ALI NASER AHMED MOHAMED**
+- 📚 **Course Reviews**  : **HASHEM AHMED OBAID ALSAIE**
+- 📝 **Course Notes**  : **REDA FOUAD AL SHBIB**
+- 📰 **Campus News**  : **MOHAMMAD HAMZAH ABDULMALEK MURAD**
+- 🛒   **Student Marketplace** : **AHMED MOHAMED KHALIL EBRAHIM ALSHAIKH**
 
 ---
 
-## 📂 Module Structure
+## 👥 Team Members  
 
-```plaintext
-/ (root folder)
-├── index.html   # Calendar HTML structure and views
-├── styles.css   # Styling for Calendar and List views
-├── app.js       # Event management JavaScript logic
+| **Name**                  | **Student ID**  | **GitHub Username** |
+|---------------------------|---------------|---------------------|
+| AHMED SALAH MAHMOOD       | 202010770     | [ASBX7](https://github.com/ASBX7) |
+| REDA FOUAD ALSHBIB        | 202010856     | [ShabeebReda](https://github.com/ShabeebReda) |
+| ALI NASER MOHAMED         | 202009697     | [alinasser-02](https://github.com/alinasser-02) |
+| MOHAMMAD HAMZAH MURAD     | 202101456     | [mohamadmurad5](https://github.com/mohamadmurad5) |
+| AHMED MOHAMED ALSHAIKH    | 202105159     | [A7med-p](https://github.com/A7med-p) |
+| HASHEM AHMED ALSAIE       | 202204853     | [hadrawer](https://github.com/Hadrawer) |
+
+---
