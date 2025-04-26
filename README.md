@@ -1,34 +1,28 @@
-# 📅 Campus Hub - Events Calendar Module
+# 📅 Campus Hub - Events Calendar Module (Phase 1)
 
 ---
 
 ## 📖 Overview
 
-This module is part of the **Campus Hub** platform, designed to allow students to **view**, **add**, **edit**, **delete**, and **manage events** happening on campus.  
-It provides two main views — a **Calendar View** and a **List View** — for a flexible and easy-to-use experience.
+This module is part of the **Campus Hub** platform.  
+It provides a basic **calendar layout**, **static event entries**, and an **Add Event form UI**, built as a **single HTML file** with embedded CSS.
 
-This part is developed by **Ahmed Salah Abbas Mahmood (202010770)**.
-
----
-
-## ✨ Features of Events Calendar
-
-- 📅 **Calendar View**: Visual calendar showing daily events.
-- 📋 **List View**: Sortable and searchable list of all events.
-- 🔍 **Search Functionality**: Quickly find events by title.
-- 🏷️ **Category Filtering**: Filter events (Academic, Social, Sports).
-- 📊 **Sorting**: Sort events by Date or Name.
-- ➕ **Add Event**: Add new events with title, time, location, and category.
-- ✏️ **Edit Event**: Update event details.
-- 🗑️ **Delete Event**: Safely remove events with confirmation.
-- 📱 **Responsive Design**: Works on both desktop and mobile devices.
+Developed by **Ahmed Salah Abbas Mahmood (202010770)** for Phase 1.
 
 ---
 
-## 📂 Module Structure
+## ✨ Features Completed in Phase 1
+
+- 📅 **Calendar Grid** showing days of the month
+- 📝 **Static Events** placed inside calendar days
+- ➕ **Add New Event Form** (visual only, not functional yet)
+- 📄 **Event Detail Views** with Edit/Delete/Back buttons (UI only)
+- 📚 **Search, Filter, Sort Menus** (UI shown, not working yet)
+- 📱 **Responsive Design** for desktop and mobile
+
+---
+
+## 📂 Files
 
 ```plaintext
-/ (root folder)
-├── index.html   # Calendar HTML structure and views
-├── styles.css   # Styling for Calendar and List views
-├── app.js       # Event management JavaScript logic
+index.html    # Contains both HTML structure and embedded CSS styling
