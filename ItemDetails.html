@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Group Details</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Study Group Details</h1>
+      <nav>
+        <ul>
+          <li><a href="MainListings.html">Home</a></li>
+          <li><a href="CreateItem.html">Create New Group</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="group-details">
+        <h2 id="groupName"></h2>
+        <p id="groupLocation"></p>
+        <p id="groupDate"></p>
+        <p id="groupDetails"></p>
+      </div>
+
+      <div class="action-buttons">
+        <a href="MainListings.html">Back</a>
+      </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CampusHub. </p>
+    </footer>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const groupId = params.get('id');
+    const groups = JSON.parse(localStorage.getItem('studyGroups')) || [];
+    const group = groups.find(g => g.id == groupId);
+
+    if (group) {
+      document.getElementById('groupName').textContent = group.name;
+      document.getElementById('groupLocation').textContent = `Location: ${group.location}`;
+      document.getElementById('groupDate').textContent = `Date: ${group.date}`;
+      document.getElementById('groupDetails').textContent = `Details: ${group.details}`;
+    } else {
+      document.body.innerHTML = '<p>No group data found!</p>';
+    }
+  </script>
+</body>
+</html>
