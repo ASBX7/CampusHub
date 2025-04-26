@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cource Reviews</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+    .view { display: none; }
+        .view:target { display: block; }
+        .view:target ~ .view { display: none; }
+
+        body:not(:has(:target)) #MainPage {
+          display: block;
+      }
+    </style>
+</head>
+<body>
+    <main class="container">
+    <section id="MainPage" class="view">
+        <header > 
+            <h1>Cource Reviews</h1>
+            <p>Share your experience with us</p>
+        </header>
+
+        <section>
+            <form>
+                <div class="grid">
+                    <input type="search" placeholder="Search by cource or instructor" />
+                    <select>
+                        <option>Filter by Department </option>
+                        <option >Computer Science</option>
+                        <option >Buisness</option>
+                        <option >Engineering</option>
+                    </select>
+                    <select >
+                        <option>Sort by</option>
+                        <option>Highest Rated</option>
+                        <option>Most Reviewed</option>
+                    </select>
+                </div>
+            </form>
+        </section>
+
+        <section style="text-align: right; margin-top: 1rem;">
+            <a href="#add-review" role="button">➕ Add New Review</a>
+        </section>
+
+        <section class="grid" style="--grid-cols: 1; @media(min-width: 768px) { --grid-cols: 2; }">
+
+            <article>
+                <h2>ITCS 333 - Internet Software Development</h2>
+                <p><strong>Instructor:</strong> Dr. Unkown</p>
+
+                <p>⭐ 4.0 / 5</p>
+                <p>"It's easy subject and you..."</p>
+                <footer>
+                    <a href="#Itcs333">Read More</a>
+                </footer>
+            </article>
+            <article>
+                <h2>STAT 273 - Probability and Statistics</h2>
+                <p><strong>Instructor:</strong> Dr.Unknown</p>
+                <p>⭐ 3.0 / 5</p>
+                <p>"Explained really well, exams..."</p>
+                <footer>
+                <a href="#Stat273">Read More</a>
+                </footer>
+            </article>
+        </section>
+
+
+            <nav atia-label="Pagination">
+                <ul class="pagination">
+                    <li><a href="#">« Prev</a></li>
+                    <li><strong>1</strong></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next »</a></li>
+                </ul>
+
+            </nav>
+    </section>
+
+    <section id="add-review" class="view">
+        <a href="#MainPage" role="button" class="secondary">Back</a>
+        <h2>Add New review</h2>
+        <form>
+          <label>
+            Subject Name
+            <input type="text" placeholder="Ex: Cloud Computing" required />
+          </label>
+          <label>
+            Instructor Name
+            <input type="text" placeholder="Ex: Dr. Hashem Ahmed" required />
+          </label>
+        
+          <label>
+            Review
+            <select required>
+              <option value="">Select a review</option>
+              <option>★★★★★</option>
+              <option>★★★★☆</option>
+              <option>★★★☆☆</option>
+              <option>★★☆☆☆</option>
+              <option>★☆☆☆☆</option>
+            </select>
+          </label>
+          <label>
+            Notes
+            <textarea placeholder="Share your experience" required></textarea>
+          </label>
+          <button type="submit">Submit</button>
+        </form>
+    </section>
+
+
+    <article id="Stat273" class="view">
+        <h2>STAT 273 - Probability and Statistics</h2>
+        <p><strong>Instructor:</strong> Dr. Unknown</p>
+        <p><strong>Rating:</strong> <span class="rating">★★★★☆</span></p>
+        <p>"Explained really well, exams were fair."</p>
+        <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
+          <a href="#MainPage" role="button">Back to Reviews</a>
+    </article>
+  
+    <article id="Itcs333" class="view">
+        <h2>ITCS 333 - Internet Software Development</h2>
+      <p><strong>Instructor:</strong> Dr. Unknown</p>
+      <p><strong>Rating:</strong> <span class="rating">★★★☆☆</span></p>
+      <p>"It's easy subject and you can have A grade"</p>
+
+      <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
+        <a href="#MainPage" role="button">Back to Reviews</a>
+    </article>
+    
+</main>
+</body>
+</html>
+
