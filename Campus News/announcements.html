@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Announcements</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="campus_news.html">Campus_News</a></li>
+                    <li><a href="sports.html">Sports</a></li>
+                    <li><a href="seminar_webinar.html">Seminars_Webinars</a></li>
+                    <li><a href="lectures.html">Lectures</a></li>
+                    <li><a href="student_life.html">Student_Life</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="media.html">Media_Press</a></li>
+                    <li><a href="academic_research.html">Academic_Research</a></li>
+                    <li class="search-bar">
+                        <input type="text" id="search-input" placeholder="Search News...">
+                        <button onclick="searchNews()">Search</button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section id="announcements">
+                <h2>Announcements</h2>
+                <h3>Parking Lot Renovation</h3>
+                <p>The university's main parking lot will be undergoing renovation starting next Monday. The renovation is expected to take two weeks, and alternative parking arrangements will be provided. Please follow the signs and instructions for temporary parking.</p>
+                <h3>Campus Wi-Fi Upgrade</h3>
+                <p>The university is upgrading its campus Wi-Fi network to provide faster and more reliable internet access. The upgrade will be completed over the next two weeks, and there may be brief interruptions during this period. Thank you for your patience.</p>
+                <h3>Health and Wellness Center Opening</h3>
+                <p>The new Health and Wellness Center is now open! The center offers a range of services, including medical consultations, mental health support, and fitness programs. Students and staff are encouraged to visit and take advantage of the resources available.</p>
+                <h3>Scholarship Application Deadline</h3>
+                <p>The deadline for scholarship applications is approaching. Students are reminded to submit their applications by the end of this month. Visit the financial aid office or the university website for more information on available scholarships and eligibility criteria.</p>
+                <h3>Campus Recycling Program</h3>
+                <p>The university is launching a new campus recycling program to promote sustainability. Recycling bins will be placed in key locations around campus, and students are encouraged to participate by properly disposing of recyclable materials.</p>
+                <section id="comments-section">
+                    <h2>Share Your Thoughts</h2>
+                    <div id="comments"></div>
+                    <form id="comment-form">
+                        <textarea id="comment-input" placeholder="Type your comment here..." required></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </section>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 Campus News. All rights reserved.</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
+</html>
