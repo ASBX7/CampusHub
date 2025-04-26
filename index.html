@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Hub - Events Calendar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="header-container">
+  <div class="header-content">
+    <a href="#listing" role="button" class="secondary">Calendar View</a>
+    <h1>Events Calendar</h1>
+    <a href="#add-form" role="button">+ Add Event</a>
+  </div>
+</header>
+
+<main class="container">
+  <div id="successMessage" class="success-message"></div>
+
+  <section id="listing" class="view">
+    <div class="grid">
+      <select id="viewSelect">
+        <option value="calendar">Calendar View</option>
+        <option value="list">List View</option>
+      </select>
+      <input id="searchInput" type="search" placeholder="Search events...">
+      <select id="filterCategory">
+        <option value="">All Categories</option>
+        <option value="academic">Academic</option>
+        <option value="social">Social</option>
+        <option value="sports">Sports</option>
+      </select>
+      <select id="sortSelect">
+        <option value="date">Sort by Date</option>
+        <option value="name">Sort by Name</option>
+      </select>
+      <button onclick="goToToday()">Today</button>
+    </div>
+
+    <div id="loading" class="loading">Loading events...</div>
+    <div id="error" class="error" style="display: none;">Failed to load events. Please try again later.</div>
+
+    <div id="calendarHeader" class="calendar"></div>
+    <div id="calendarContainer" class="calendar"></div>
+
+    <div id="listContainer" style="display: none;">
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date & Time</th>
+            <th>Location</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody id="listTableBody"></tbody>
+      </table>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
+  </section>
+
+  <section id="event-detail" class="view">
+    <h2 id="detailTitle">Event Title</h2>
+    <p><strong>Date:</strong> <span id="detailDate"></span></p>
+    <p><strong>Location:</strong> <span id="detailLocation"></span></p>
+    <p><strong>Category:</strong> <span id="detailCategory"></span></p>
+    <p><strong>Description:</strong></p>
+    <p id="detailDescription"></p>
+    <div class="detail-buttons">
+      <a href="#add-form" role="button" onclick="editEventDetail()">Edit</a>
+      <a href="#listing" role="button" class="secondary" onclick="deleteEvent()">Delete</a>
+      <a href="#listing" role="button" class="secondary">Back to Calendar</a>
+    </div>
+  </section>
+
+  <section id="add-form" class="view">
+    <h2 id="formTitle">Add New Event</h2>
+    <form id="eventForm">
+      <input type="hidden" id="editEventId">
+      <label>Event Title*<input id="eventTitle" type="text" required></label>
+      <label>Date & Time*<input id="eventDateTime" type="datetime-local" required></label>
+      <label>Location<input id="eventLocation" type="text"></label>
+      <label>Category*
+        <select id="eventCategory" required>
+          <option value="">Select category</option>
+          <option value="academic">Academic</option>
+          <option value="social">Social</option>
+          <option value="sports">Sports</option>
+        </select>
+      </label>
+      <label>Description<textarea id="eventDescription"></textarea></label>
+      <div class="form-buttons">
+        <button type="submit" id="submitButton">Submit</button>
+        <button type="button" class="secondary" onclick="location.hash='listing'">Cancel</button>
+      </div>
+      <p id="formError" style="color: red; display: none;">Please fill in all required fields.</p>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>© 2025 Campus Hub</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
