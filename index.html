@@ -1,32 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Campus Hub - Main Page</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+  <style>
+    :root {
+      --navy-background: #0a192f;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--navy-background);
+      color: var(--muted-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main.container {
+      width: 100%;
+      max-width: 650px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    header h2 {
+      font-weight: 400;
+      margin-top: 0;
+      color: var(--muted-color);
+    }
+
+    .module-links {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .module-card {
+      display: block;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      background-color: var(--primary-focus);
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .module-card:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .module-card small {
+      display: block;
+      margin-top: 0.3rem;
+      color: #ccc;
+      font-size: 0.85rem;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 480px) {
+      .module-card {
+        font-size: 0.95rem;
+        padding: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<main class="container">
+  <main class="container">
+    <header>
+      <h1>🎓 Campus Hub</h1>
+      <h2>Explore Student Tools</h2>
+    </header>
 
-  <header>
-    <h1>Welcome to Campus Hub 🎓</h1>
-    <p>Select a module to explore</p>
-  </header>
+    <div class="module-links">
+      <a href="Events Calendar/index.html" class="module-card">
+        📅 Events Calendar
+        <small>See upcoming campus events and schedules</small>
+      </a>
+      <a href="Study Group Finder/MainListings.html" class="module-card">
+        👥 Study Group Finder
+        <small>Join or create study groups for your courses</small>
+      </a>
+      <a href="Course Reviews/index.html" class="module-card">
+        📝 Course Reviews
+        <small>Read and write reviews about course experiences</small>
+      </a>
+      <a href="Course Notes/CourseNotes.html" class="module-card">
+        📚 Course Notes
+        <small>Access and share notes from past and current courses</small>
+      </a>
+      <a href="Campus News/campus_news.html" class="module-card">
+        📰 Campus News
+        <small>Stay updated with the latest university news</small>
+      </a>
+      <a href="Student Marketplace/smp.html" class="module-card">
+        🛍️ Student Marketplace
+        <small>Buy and sell items within your campus community</small>
+      </a>
+    </div>
 
-  <nav>
-    <ul>
-      <li><a href="Events Calendar/index.html">Events Calendar</a></li>
-      <li><a href="Study Group Finder/MainListings.html">Study Group Finder</a></li>
-      <li><a href="Course Reviews/index.html">Course Reviews</a></li>
-      <li><a href="Course Notes/CourseNotes.html">Course Notes</a></li>
-      <li><a href="Campus News/campus_news.html">Campus News</a></li>
-      <li><a href="Student Marketplace/smp.html">Student Marketplace</a></li>
-    </ul>
-  </nav>
-
-</main>
+    <footer>
+      &copy; 2025 Campus Hub Team. All rights reserved.
+    </footer>
+  </main>
 
 </body>
 </html>
