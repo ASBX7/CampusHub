@@ -1,158 +1,110 @@
-let scrollDirection = 1;
+const API_URL = 'https://jsonplaceholder.typicode.com/posts?_limit=30';
 
-function scrollLeft() {
-    document.querySelector('.scroll-content').scrollBy({
-        left: -200,
-        behavior: 'smooth'
-    });
+const newsList = document.querySelector('.news-list');
+const searchInput = document.querySelector('input[type="text"]');
+const sortSelect = document.querySelector('select');
+const pagination = document.querySelector('.pagination');
+const itemsPerPage = 6;
+
+let allNews = [];
+let currentPage = 1;
+
+function showLoading() {
+  newsList.innerHTML = '<p class="text-center">Loading...</p>';
 }
 
-function scrollRight() {
-    document.querySelector('.scroll-content').scrollBy({
-        left: 200,
-        behavior: 'smooth'
-    });
+function showError(message) {
+  newsList.innerHTML = `<p class="text-center text-red-600">${message}</p>`;
 }
 
-function autoScroll() {
-    const scrollContent = document.querySelector('.scroll-content');
-    const maxScrollLeft = scrollContent.scrollWidth - scrollContent.clientWidth;
-
-    if (scrollContent.scrollLeft >= maxScrollLeft) {
-        scrollDirection = -1;
-    } else if (scrollContent.scrollLeft <= 0) {
-        scrollDirection = 1;
-    }
-
-    scrollContent.scrollBy({
-        left: 200 * scrollDirection,
-        behavior: 'smooth'
-    });
+async function fetchNews() {
+  showLoading();
+  try {
+    const response = await fetch(API_URL);
+    if (!response.ok) throw new Error('Could not fetch news');
+    const data = await response.json();
+    allNews = data.map(item => ({
+      id: item.id,
+      title: item.title,
+      date: randomDate(), 
+      summary: item.body.slice(0, 80) + '...'
+    }));
+    renderNews();
+  } catch (error) {
+    showError(error.message);
+  }
 }
-setInterval(autoScroll, 3000);
 
-document.getElementById('comment-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const commentInput = document.getElementById('comment-input');
-    const commentText = commentInput.value;
-    if (commentText) {
-        addComment(commentText);
-        commentInput.value = '';
-    }
+function randomDate() {
+  const start = new Date(2023, 0, 1);
+  const end = new Date();
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString().split('T')[0];
+}
+
+function renderNews() {
+  const filtered = filterNews();
+  const sorted = sortNews(filtered);
+  const paginated = paginateNews(sorted);
+  renderPagination(sorted.length);
+  
+  if (paginated.length === 0) {
+    newsList.innerHTML = '<p>No news found.</p>';
+    return;
+  }
+
+  newsList.innerHTML = paginated.map(news => `
+    <div class="bg-white p-4 rounded shadow">
+      <h2 class="text-lg font-bold">${news.title}</h2>
+      <p class="text-sm text-gray-500">${news.date}</p>
+      <p class="mt-2">${news.summary}</p>
+      <a href="detail.html?id=${news.id}" class="text-blue-600 mt-2 inline-block">Read more</a>
+    </div>
+  `).join('');
+}
+
+function filterNews() {
+  const term = searchInput.value.toLowerCase();
+  return allNews.filter(item => item.title.toLowerCase().includes(term));
+}
+
+function sortNews(newsArray) {
+  const value = sortSelect.value;
+  if (value.includes('Date')) {
+    return [...newsArray].sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else {
+    return [...newsArray].sort((a, b) => a.title.localeCompare(b.title));
+  }
+}
+
+function paginateNews(newsArray) {
+  const start = (currentPage - 1) * itemsPerPage;
+  return newsArray.slice(start, start + itemsPerPage);
+}
+
+function renderPagination(totalItems) {
+  const pageCount = Math.ceil(totalItems / itemsPerPage);
+  pagination.innerHTML = '';
+  for (let i = 1; i <= pageCount; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.className = `px-3 py-1 rounded ${i === currentPage ? 'bg-blue-600 text-white' : 'bg-gray-200'}`;
+    btn.addEventListener('click', () => {
+      currentPage = i;
+      renderNews();
+    });
+    pagination.appendChild(btn);
+  }
+}
+
+searchInput?.addEventListener('input', () => {
+  currentPage = 1;
+  renderNews();
 });
 
-function addComment(text) {
-    const commentSection = document.getElementById('comments');
-    const commentDiv = document.createElement('div');
-    commentDiv.classList.add('comment');
-
-    const commentText = document.createElement('p');
-    commentText.textContent = text;
-    commentDiv.appendChild(commentText);
-
-    const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
-    editButton.addEventListener('click', function() {
-        const newText = prompt('Edit your comment:', commentText.textContent);
-        if (newText) {
-            commentText.textContent = newText;
-        }
-    });
-    commentDiv.appendChild(editButton);
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', function() {
-        commentSection.removeChild(commentDiv);
-    });
-    commentDiv.appendChild(deleteButton);
-
-    commentSection.appendChild(commentDiv);
-}
-function searchNews() {
-    const searchInput = document.getElementById('search-input').value.toLowerCase();
-    const newsItems = document.querySelectorAll('.news-item');
-    newsItems.forEach(item => {
-        if (item.textContent.toLowerCase().includes(searchInput)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-   });
- }
- document.getElementById('news-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const category = document.getElementById('category').value;
-    const title = document.getElementById('title').value;
-    const content = document.getElementById('content').value;
-
-    if (isLegitNews(title, content)) {
-        addNews(category, title, content);
-        alert('News submitted successfully!');
-    } else {
-        alert('Please submit legitimate news.');
-    }
+sortSelect?.addEventListener('change', () => {
+  renderNews();
 });
 
-function isLegitNews(title, content) {
-
-    return title.length > 10 && content.length > 50;
+if (newsList) {
+  fetchNews();
 }
-
-function addNews(category, title, content) {
-
-    const newsSection = document.getElementById(category);
-    const newsItem = document.createElement('div');
-    newsItem.classList.add('news-item');
-    newsItem.innerHTML = `<h3>${title}</h3><p>${content}</p>`;
-    newsSection.appendChild(newsItem);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    const newsContainer = document.getElementById('trending');
-    const searchInput = document.getElementById('search-input');
-    const loadingIndicator = document.createElement('div');
-    loadingIndicator.textContent = 'Loading...';
-    newsContainer.appendChild(loadingIndicator);
-
-    async function fetchNews() {
-        try {
-            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            displayNews(data);
-        } catch (error) {
-            console.error('Fetch error:', error);
-            newsContainer.innerHTML = '<p>Error loading news. Please try again later.</p>';
-        } finally {
-            loadingIndicator.style.display = 'none';
-        }
-    }
-
-    function displayNews(newsItems) {
-        newsContainer.innerHTML = '';
-        newsItems.forEach(item => {
-            const newsItem = document.createElement('div');
-            newsItem.classList.add('news-item');
-            newsItem.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
-            newsContainer.appendChild(newsItem);
-        });
-    }
-
-    searchInput.addEventListener('input', () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const newsItems = document.querySelectorAll('.news-item');
-        newsItems.forEach(item => {
-            if (item.textContent.toLowerCase().includes(searchTerm)) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    });
-
-    // Fetch news on page load
-    fetchNews();
-});
