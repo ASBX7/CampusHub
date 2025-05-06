@@ -108,3 +108,51 @@ function addNews(category, title, content) {
     newsSection.appendChild(newsItem);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const newsContainer = document.getElementById('trending');
+    const searchInput = document.getElementById('search-input');
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.textContent = 'Loading...';
+    newsContainer.appendChild(loadingIndicator);
+
+    async function fetchNews() {
+        try {
+            const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            displayNews(data);
+        } catch (error) {
+            console.error('Fetch error:', error);
+            newsContainer.innerHTML = '<p>Error loading news. Please try again later.</p>';
+        } finally {
+            loadingIndicator.style.display = 'none';
+        }
+    }
+
+    function displayNews(newsItems) {
+        newsContainer.innerHTML = '';
+        newsItems.forEach(item => {
+            const newsItem = document.createElement('div');
+            newsItem.classList.add('news-item');
+            newsItem.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
+            newsContainer.appendChild(newsItem);
+        });
+    }
+
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const newsItems = document.querySelectorAll('.news-item');
+        newsItems.forEach(item => {
+            if (item.textContent.toLowerCase().includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+
+    // Fetch news on page load
+    fetchNews();
+});
