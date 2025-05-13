@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     // State management
     const state = {
@@ -112,15 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Apply search filter
+        // Apply search filter with debouncing and optimized search
         if (state.currentSearch) {
-            const searchTerm = state.currentSearch.toLowerCase();
-            filtered = filtered.filter(item => 
-                item.title.toLowerCase().includes(searchTerm) || 
-                item.description.toLowerCase().includes(searchTerm) ||
-                item.category.toLowerCase().includes(searchTerm) ||
-                item.location.toLowerCase().includes(searchTerm)
-            );
+            const searchTerms = state.currentSearch.toLowerCase().split(' ').filter(term => term.length > 0);
+            filtered = filtered.filter(item => {
+                const itemText = `${item.title} ${item.description} ${item.category} ${item.location}`.toLowerCase();
+                return searchTerms.every(term => itemText.includes(term));
+            });
         }
         
         // Apply sorting
@@ -301,12 +300,20 @@ document.addEventListener('DOMContentLoaded', function() {
             renderItems();
         });
         
+        // Debounced search handler
+        let searchTimeout;
+        function handleSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                state.currentSearch = mainSearch.value.trim();
+                applyFilters();
+                renderItems();
+            }, 300);
+        }
+
         // Main search
-        mainSearchBtn.addEventListener('click', function() {
-            state.currentSearch = mainSearch.value.trim();
-            applyFilters();
-            renderItems();
-        });
+        mainSearch.addEventListener('input', handleSearch);
+        mainSearchBtn.addEventListener('click', handleSearch);
         // Form validation and submission
         addItemForm.addEventListener('submit', function(e) {
             e.preventDefault();
