@@ -8,7 +8,7 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 
 ### 🛠️ Modules We Are Building:  
 - 📅 **Events Calendar** : **AHMED SALAH ABBAS MAHMOOD**  
-- 🎓 **Study Group Finder**  : **ALI NASER AHMED MOHAMED**
+- 🎓 **Study Group Finder**  : **ALI NASER AHMED MOHAMED** -> **Dropped Course**
 - 📚 **Course Reviews**  : **HASHEM AHMED OBAID ALSAIE**
 - 📝 **Course Notes**  : **REDA FOUAD AL SHBIB**
 - 📰 **Campus News**  : **MOHAMMAD HAMZAH ABDULMALEK MURAD**
