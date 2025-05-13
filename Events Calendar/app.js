@@ -1,7 +1,8 @@
 let eventsData = [];
+let eventComments = {};
 let currentPage = 1;
 const eventsPerPage = 6;
-let currentView = "calendar"; // default view
+let currentView = "calendar";
 
 function showSuccessMessage(message) {
   const box = document.getElementById("successMessage");
@@ -150,6 +151,7 @@ function showEventDetail(id) {
   document.getElementById('detailCategory').textContent = e.category;
   document.getElementById('detailDescription').textContent = e.description || 'No description.';
   document.getElementById('editEventId').value = e.id;
+  renderComments(id);
   location.hash = 'event-detail';
 }
 
@@ -222,6 +224,37 @@ function deleteEvent() {
     eventsData = eventsData.filter(ev => ev.id != id);
     showSuccessMessage('Event deleted successfully!');
     location.hash = 'listing';
+    renderComments(id);
     loadEvents();
   }
+}
+
+document.getElementById('commentForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const eventId = document.getElementById('editEventId').value;
+  const comment = document.getElementById('commentInput').value.trim();
+  if (!comment) return;
+
+  if (!eventComments[eventId]) eventComments[eventId] = [];
+  eventComments[eventId].push(comment);
+  document.getElementById('commentInput').value = '';
+  renderComments(eventId);
+});
+
+function renderComments(eventId) {
+  const container = document.getElementById('commentsSection');
+  container.innerHTML = '';
+  const comments = eventComments[eventId] || [];
+  if (comments.length === 0) {
+    container.innerHTML = '<p>No comments yet.</p>';
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  comments.forEach(comment => {
+    const li = document.createElement('li');
+    li.textContent = comment;
+    ul.appendChild(li);
+  });
+  container.appendChild(ul);
 }
