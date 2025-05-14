@@ -339,7 +339,7 @@ async function renderComments(eventId) {
     const ul = document.createElement("ul");
     comments.forEach((comment) => {
       const li = document.createElement("li");
-      li.textContent = comment;
+      li.textContent = comment.comment;
       ul.appendChild(li);
     });
     container.appendChild(ul);
