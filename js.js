@@ -274,6 +274,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     <button class="delete-btn">Save Item</button>
                 </div>
             </div>
+            <div class="detail-actions">
+                    <h3>Comments</h3>
+                    <div id="comments-container"></div>
+                    <form id="add-comment-form">
+                    <textarea placeholder="Add a comment..." required></textarea>
+                    <button>Post Comment</button>
+                    </form>
+            </div>
         `;
     }
   
