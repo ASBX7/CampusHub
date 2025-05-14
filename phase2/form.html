@@ -4,23 +4,87 @@
   <meta charset="UTF-8">
   <title>Add News</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    // Function to display error messages from URL parameters
+    window.onload = function() {
+      // Get URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const status = urlParams.get('status');
+      
+      if (status === 'success') {
+        const message = urlParams.get('message') || 'News added successfully!';
+        showAlert(message, 'success');
+      } else if (status === 'error') {
+        try {
+          const encodedData = urlParams.get('data');
+          if (encodedData) {
+            const data = JSON.parse(atob(encodedData));
+            showAlert(data.message || 'An error occurred', 'error');
+            
+            // Display specific field errors
+            if (data.errors) {
+              Object.keys(data.errors).forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                  input.classList.add('border-red-500');
+                  
+                  // Find or create error message element
+                  let errorElement = document.getElementById(`${field}-error`);
+                  if (!errorElement) {
+                    errorElement = document.createElement('div');
+                    errorElement.id = `${field}-error`;
+                    errorElement.className = 'text-red-500 text-sm mt-1';
+                    input.parentNode.insertBefore(errorElement, input.nextSibling);
+                  }
+                  errorElement.textContent = data.errors[field];
+                }
+              });
+            }
+          }
+        } catch (e) {
+          console.error('Error parsing response data:', e);
+        }
+      }
+    };
+    
+    // Function to show alert message
+    function showAlert(message, type) {
+      const alertBox = document.createElement('div');
+      alertBox.className = type === 'success' 
+        ? 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4' 
+        : 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4';
+      alertBox.innerHTML = `<span class="block sm:inline">${message}</span>`;
+      
+      const form = document.querySelector('form');
+      form.parentNode.insertBefore(alertBox, form);
+      
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        alertBox.remove();
+      }, 5000);
+    }
+  </script>
 </head>
 <body class="bg-gray-100">
   <main class="max-w-xl mx-auto bg-white mt-10 p-6 rounded shadow">
     <h1 class="text-2xl font-bold mb-4">Add Campus News</h1>
-    <form>
+    <form method="POST" action="campus-news-api/api/create.php">
       <label class="block mb-1 font-medium" for="title">Title<span class="text-red-500">*</span></label>
       <input id="title" name="title" type="text" placeholder="News title" required class="w-full p-2 border rounded mb-4">
-
+      
       <label class="block mb-1 font-medium" for="date">Date<span class="text-red-500">*</span></label>
       <input id="date" name="date" type="date" required class="w-full p-2 border rounded mb-4">
-
+      <script>
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+      </script>
+      
       <label class="block mb-1 font-medium" for="summary">Summary<span class="text-red-500">*</span></label>
-      <textarea id="summary" name="summary" placeholder="Short summary" required class="w-full p-2 border rounded mb-4"></textarea>
-
+      <textarea id="summary" name="summary" placeholder="Short summary" required class="w-full p-2 border rounded mb-4" rows="5"></textarea>
+      
       <div class="flex justify-between">
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
-        <a href="index.html" class="text-blue-600 underline">Back</a>
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit</button>
+        <a href="index.html" class="text-blue-600 hover:text-blue-800 underline px-4 py-2">Back</a>
       </div>
     </form>
   </main>

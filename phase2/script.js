@@ -1,4 +1,5 @@
 const API_URL = 'https://jsonplaceholder.typicode.com/posts?_limit=30';
+//const API_URL = 'https://https://campus-news.replit.app/api/news/list.php';
 
 const newsList = document.querySelector('.news-list');
 const searchInput = document.querySelector('input[type="text"]');
@@ -108,3 +109,4 @@ sortSelect?.addEventListener('change', () => {
 if (newsList) {
   fetchNews();
 }
+
