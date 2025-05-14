@@ -347,3 +347,12 @@ async function renderComments(eventId) {
     container.innerHTML = "<p>Failed to load comments.</p>";
   }
 }
+
+function prepareAddEventForm() {
+  document.getElementById("editEventId").value = "";
+  document.getElementById("eventForm").reset();
+  document.getElementById("formTitle").textContent = "Add New Event";
+  document.getElementById("submitButton").textContent = "Submit";
+  document.getElementById("formError").style.display = "none";
+  document.getElementById("commentsSection").innerHTML = "";
+}
