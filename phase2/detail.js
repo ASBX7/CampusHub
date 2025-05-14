@@ -12,7 +12,7 @@ function generateFakeDate() {
 if (!id) {
   container.innerHTML = `<p class="text-red-600 text-center">No news ID provided.</p>`;
 } else {
-  fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  fetch(`https://963858b5-c2e4-4930-9e45-d178faad9f3e-00-986w68eb5ssi.sisko.replit.dev/campus-news-api/api/read.php?id=${id}`)
     .then(res => {
       if (!res.ok) {
         throw new Error('News not found.');
