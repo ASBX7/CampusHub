@@ -58,30 +58,40 @@
         <section id="add-review" class="view">
             <a href="#MainPage" role="button" class="secondary">Back</a>
             <h2>Add New review</h2>
-            <form>
+            <form id="add-review-form">
                 <label>
                     Subject Name
-                    <input type="text" placeholder="Ex: Cloud Computing" required />
+                    <input type="text" name="subject_name" placeholder="Ex: Cloud Computing" required />
                 </label>
                 <label>
                     Instructor Name
-                    <input type="text" placeholder="Ex: Dr. Hashem Ahmed" required />
+                    <input type="text" name="instructor_name" placeholder="Ex: Dr. Hashem Ahmed" required />
+                </label>
+                <label>
+                    Department
+                    <select name="Department" required>
+                        <option value="">Select a Department</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Buisness">Buisness</option>
+                        <option value="Engineering">Engineering</option>
+                
+                    </select>
                 </label>
 
                 <label>
                     Review
-                    <select required>
+                    <select name="select_review" required>
                         <option value="">Select a review</option>
-                        <option>★★★★★</option>
-                        <option>★★★★☆</option>
-                        <option>★★★☆☆</option>
-                        <option>★★☆☆☆</option>
-                        <option>★☆☆☆☆</option>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★☆☆</option>
+                        <option value="3">★★★★☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
                     </select>
                 </label>
                 <label>
                     Notes
-                    <textarea placeholder="Share your experience" required></textarea>
+                    <textarea name="notes" placeholder="Share your experience" required></textarea>
                 </label>
                 <button type="submit">Submit</button>
             </form>
@@ -89,26 +99,7 @@
 
         <section id="review-detail" class="view">
         </section>
-        <!-- Detail View for STAT 273 -->
-        <!-- <article id="Stat273" class="view">
-            <h2>STAT 273 - Probability and Statistics</h2>
-            <p><strong>Instructor:</strong> Dr. Unknown</p>
-            <p><strong>Rating:</strong> <span class="rating">★★★★☆</span></p>
-            <p>"Explained really well, exams were fair."</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <a href="#MainPage" role="button">Back to Reviews</a>
-            </div>
-        </article>
-
-        <article id="Itcs333" class="view">
-            <h2>ITCS 333 - Internet Software Development</h2>
-            <p><strong>Instructor:</strong> Dr. Unknown</p>
-            <p><strong>Rating:</strong> <span class="rating">★★★☆☆</span></p>
-            <p>"It's easy subject and you can have A grade"</p>
-            <div style="display: flex; gap: 0.5rem; margin: 1rem 0;">
-                <a href="#MainPage" role="button">Back to Reviews</a>
-            </div>
-        </article> -->
+        
     </main>
 </body>
 </html>
