@@ -171,7 +171,7 @@
 }
 
 #commentsSection li::before {
-  content: "ðŸ’¬";
+  content: "💬";
   position: absolute;
   left: -1.5rem;
   top: 0.75rem;
