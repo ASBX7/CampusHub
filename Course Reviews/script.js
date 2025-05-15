@@ -254,13 +254,12 @@ window.addEventListener('DOMContentLoaded', () => {
         const hash = window.location.hash;
         if (hash.startsWith('#review-')) {
             const id = hash.replace('#review-', '');
-            // تأكد من تحميل المراجعات أولاً ثم عرض التفاصيل
             const interval = setInterval(() => {
                 if (allReviews.length > 0) {
                     clearInterval(interval);
                     showDetail(id);
                 }
-            }, 100); // ينتظر حتى تحميل المراجعات
+            }, 100); 
         }
     });
     
