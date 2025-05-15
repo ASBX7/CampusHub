@@ -28,3 +28,5 @@ Campus Hub provides a centralized space for students to connect, share knowledge
 | HASHEM AHMED ALSAIE       | 202204853     | [hadrawer](https://github.com/Hadrawer) |
 
 ---
+## Replit Link:
+Events Calender: https://replit.com/@ahmedalbost/PHP-MySQL?v=1
