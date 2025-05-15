@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="app.js"></script> 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Course Notes</title>
@@ -17,6 +16,7 @@
       background: var(--primary);
       color: white;
       padding: 1rem;
+      text-align: center;
     }
 
     .note-grid {
@@ -48,6 +48,42 @@
       display: flex;
       justify-content: space-between;
     }
+ .small-button {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  width: auto;
+  display: inline-block;
+  min-width: unset;
+  length: 1px ;
+}
+#comment-section {
+  margin-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 1rem;
+}
+
+#comment-list .comment-box {
+  background: #f1f5f9;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+#comment-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  resize: vertical;
+}
+
+#comment-form button {
+  margin-top: 0.5rem;
+}
+
+
+
+
   </style>
 </head>
 <body>
@@ -58,14 +94,12 @@
   </header>
 
   <main class="container">
-    <!-- Main Listing Page -->
+    <!-- Listing -->
     <section>
       <h2>Course Notes Listing</h2>
       <input type="search" placeholder="Search notes...">
       <select>
         <option>Filter by course</option>
-        <option>Math</option>
-        <option>Science</option>
       </select>
       <select>
         <option>Sort by</option>
@@ -73,18 +107,7 @@
         <option>Popular</option>
       </select>
 
-      <div class="note-grid">
-        <article class="note-card">
-          <h3>Intro to web developing</h3>
-          <p>Summary and tips from lectures 1–5.</p>
-          <a href="#detail">View Details</a>
-        </article>
-        <article class="note-card">
-          <h3>Organic Chemistry Notes</h3>
-          <p>Reaction mechanisms and important compounds.</p>
-          <a href="#detail">View Details</a>
-        </article>
-      </div>
+      <div class="note-grid"></div>
 
       <nav>
         <ul class="pagination">
@@ -98,10 +121,11 @@
       <a href="#create" role="button">Add New Note</a>
     </section>
 
-    <!-- Item Creation Form -->
-    <section id="create" class="form-section">
+    <!-- Creation -->
+    <section id="create" class="form-section" style="display:none">
       <h2>Create Course Note</h2>
       <form>
+
         <label for="course">Course Name</label>
         <input type="text" id="course" name="course" placeholder="e.g. ITCS333" required>
 
@@ -116,29 +140,33 @@
 
         <div class="action-buttons">
           <button type="submit">Submit Note</button>
-          <a href="#" role="button" class="secondary">Cancel</a>
+          <a href="#" role="button" class="secondary small-button">Cancel</a>
+          
+
+
+
         </div>
       </form>
+      <div id="comment-section" class="form-section">
+  <h3>General Comments</h3>
+  <div id="comment-list">
+    <p>No comments yet.</p>
+  </div>
+  <form id="comment-form">
+    <label for="comment-input">Leave a comment</label>
+    <textarea id="comment-input" name="comment" rows="3" placeholder="Your thoughts..." required></textarea>
+    <button type="submit">Post Comment</button>
+  </form>
+</div>
+
     </section>
 
-    <!-- Item Detail View -->
-    <section id="detail" class="form-section">
+    <!-- Detail -->
+    <section id="detail" class="form-section" style="display:none">
       <h2>Course Note Details</h2>
       <article>
-        <h3>Intro to Web developing</h3>
-        <p><strong>Course:</strong> ITCS333</p>
-        <p>This document contains summaries and strategies from lectures 1 through 5. Includes pseudo-code and examples.</p>
-
-        <div class="action-buttons">
-          <a href="#" role="button" class="secondary">Edit</a>
-          <a href="#" role="button" class="contrast">Delete</a>
-        </div>
-
-        <h4>Comments</h4>
-        <div class="comment-box">Great summary, helped me for the quiz!</div>
-        <div class="comment-box">Could you add lecture 6?</div>
-
-        <a href="#" role="button" class="secondary">Back to Listing</a>
+        <h3></h3>
+        <div id="detail-content"></div>
       </article>
     </section>
   </main>
@@ -147,5 +175,8 @@
   <footer>
     <p>&copy; 2025 Campus Hub</p>
   </footer>
+
+  <!-- JS File -->
+  <script src="app.js" defer></script>
 </body>
 </html>
